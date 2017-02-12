@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Super-Sprinter-3000-list</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    	table {
+			  border-collapse: collapse;
+		  }
+		  td, th {
+			  border: 1px solid #999;
+			  padding: 0.1em 1em;
+		  }
+	  </style>
+  </head>
+  <body>
+    <h1>Super-Sprinter-3000</h1>
+		  <form action="{{ url_for('new_story') }}" method="GET">
+		    	<p><input type="submit" value="Add New User Story"></p>
+		  </form>
+      <table>
+          <tr>
+            <th>ID</th>
+            <th>Story Title</th>
+            <th>User Story</th>
+            <th>Criteria</th>
+            <th>Business Value</th>
+            <th>Estimation</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Del</th>
+          </tr>
+        {% for story in stories %}
+          <tr>
+            <td>{{ story.id }}</td>
+            <td>{{ story.title }}</td>
+            <td>{{ story.story }}</td>
+            <td>{{ story.criteria }}</td>
+            <td>{{ story.business }}</td>
+            <td>{{ story.estimation }}</td>
+            <td>{{ story.status|safe }}</td>
+            <td><a href="{{ url_for('edit_story', id=story.id) }}"><img src='pen.png' class="change-btn"></a></td>
+            <td><a href="{{ url_for('delete_story', id=story.id) }}"> <img src='cross.png' class="change-btn"></a></td>
+          </tr>
+        {% endfor %}
+          <tr>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+          </tr>
+    </table>
+  </body>
+</html>
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Super-Sprinter-3000-add</title>
+  </head>
+  <body>
+      {% if is_new_story %}
+        <h1>Super-Sprinter-3000 - add new story</h1>
+        <form action="{{ url_for('save_story') }}" method="POST">
+      {% else %}
+        <h1>Super-Sprinter-3000 - edit story</h1>
+        <form action="{{ url_for('update_story', id=story.id) }}" method="POST">
+      {% endif %}  
+      <dl>
+        <dt><label>Story Title</label></dt>
+        <dd><input type="text" name="title" title_id="title" size="51" value="{{ story.title }}" required></dd>
+        <dt><label>User Story</label></dt>
+        <dd><textarea name ="story" rows="5" cols="50" story_id="story" required>{{ story.story }}</textarea></dd>
+        <dt><label>Acceptance Criteria</label></dt>
+        <dd><textarea name ="criteria" rows="5" cols="50" criteria_id="criteria">{{ story.criteria }}</textarea></dd>
+        <dt><label>Business Value</label></dt>
+        <dd>
+          <input type="range" name="business" id="business_id" min="100" max="1500" step="100" value="{{ story.business }}" oninput="b_out.value = business_id.value">
+          <output id="b_out">{{ story.business }}</output>
+        </dd>
+        <dt><label>Estimation (h)</label></dt>
+        <dd>
+          <input type="range" name="estimation" id="estimation_id" min="0.5" max="40" step="0.5" value="{{ story.estimation }}" oninput="e_out.value = estimation_id.value">
+          <output id="e_out">{{ story.estimation}}</output>
+        </dd>
+        <dt><label> Status</label></dt>
+        <dd><select name="status" id="status_id" required>
+          <option value="" {% if story.status == "" %} selected="selected" {% endif %} >None</option> 
+          <option value="planning" {% if story.status == "planning" %} selected="selected" {% endif %} >Planning</option>
+          <option value="to do" {% if story.status == "to do" %} selected="selected" {% endif %} >To Do</option>
+          <option value="in progress" {% if story.status == "in progress"  %} selected="selected" {% endif %} >In Progress</option>
+          <option value="review" {% if story.status == "review"  %} selected="selected" {% endif %} >Review</option>
+          <option value="done" {% if story.status == "done"  %} selected="selected" {% endif %} >Done</option>
+        </select></dd>
+      {% if is_new_story %}
+        <p><input type="submit" value="Create"></p>
+      {% else %}
+        <p><input type="submit" value="Update"></p>
+      {% endif %} 
+      <dl>
+    </form>
+  </body>
+</html>

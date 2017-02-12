@@ -1,0 +1,4 @@
+graft sprinter/templates
+graft sprinter/static
+include sprinter/connectdatabase.py
+include sprinter/models.py
